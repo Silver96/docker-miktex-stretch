@@ -8,10 +8,10 @@ RUN echo "deb http://miktex.org/download/debian stretch universe" | tee /etc/apt
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends miktex perl
 
+RUN miktexsetup --shared=yes finish
+RUN initexmf --set-config-value=[MPM]AutoInstall=1
+
 RUN useradd -m user
 USER user
-
-RUN miktexsetup finish
-RUN initexmf --set-config-value=[MPM]AutoInstall=1
 
 WORKDIR /user
